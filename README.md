@@ -32,4 +32,4 @@
 
 **Note- I will personally check each code and if I find any code not following the rules, then his Pull Request will be marked as invalid and he won't be eligible for the prize**
 
-**If u need anyhelp, Contact me at 7991885162(call or WhatsApp) at any time 24*7. I will be more than happy as long as everyone follows the rule.
+**If u need any help, Contact me at **7991885162**(call or WhatsApp) at any time 24*7. I will be more than happy as long as everyone follows the rule.
