@@ -1,2 +1,5 @@
 # C0d3
-Create hacktober pull requests
+
+This repo's main purpose is to help newbies to complete the Hacktoberfest Challenge.
+
+
