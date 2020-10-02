@@ -1,9 +1,7 @@
-// C++ program to convert binary to decimal 
-#include <iostream> 
+#include <iostream> // C++ program to convert binary to decimal
 using namespace std; 
 
-// Function to convert binary to decimal 
-int binaryToDecimal(int n) 
+int binaryToDecimal(int n) // Function to convert binary to decimal 
 { 
 	int num = n; 
 	int dec_value = 0; 
@@ -23,9 +21,7 @@ int binaryToDecimal(int n)
 
 	return dec_value; 
 } 
-
-// Driver program to test above function 
-int main() 
+int main() // Driver program to test above function 
 { 
 	int num ;
     cin >> num;
