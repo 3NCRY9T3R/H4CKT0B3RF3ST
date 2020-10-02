@@ -1,4 +1,4 @@
-name: Greetings
+name: Greetings to all of you!
 
 on: [pull_request, issues]
 
