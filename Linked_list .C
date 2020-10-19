@@ -1,0 +1,444 @@
+#include<stdio.h>
+#include<stdlib.h>
+/*****************************************/
+struct node{
+int info;
+struct node *Next;
+};
+/*****************************************/
+struct node* GetNode()
+{
+    struct node *p;
+    p=(struct node*)malloc(sizeof(struct node));
+    return p;
+}
+/*****************************************/
+/******Insert the node a beginning*******/
+
+void InsBeg( struct node **START,int x)
+{
+    struct node *p;
+    p=GetNode();
+    p->info=x;
+    p->Next=(*START);
+    (*START)=p;
+}
+/*****************************************/
+/**********Inset the node at end**********/
+
+ void InsEnd(struct node **START,int x)
+{
+     struct node *p;
+      struct node *q;
+    if((*START)==NULL)
+        InsBeg(&(*START),x);
+    else
+    {
+        p=(*START);
+        while(p->Next!=NULL)
+        {
+            p=p->Next;
+        q=GetNode();
+        }
+        q->info=x;
+        p->Next=q;
+        q->Next=NULL;
+    }
+}
+/*****************************************/
+/*****Delete the node at beginning********/
+
+int DelBeg(struct node **START)
+{
+    int x;
+    struct node *p;
+    if(START==NULL)
+       {
+    printf("void delection");
+    exit(1);
+    }
+    else
+    {
+        p=(*START);
+        (*START)=p->Next;
+        x=p->info;
+        free(p);
+        return x;
+    }
+}
+/*****************************************/
+/*****Delete the node at end**************/
+
+int DelEnd(struct node **START)
+{
+     int x;
+     struct node *p;
+     struct node *q;
+
+     q=NULL;
+     p=(*START);
+     while(p->Next!=NULL)
+     {
+         q=p;
+         p=p->Next;
+     }
+
+         q->Next=NULL;
+         x=p->info;
+         free(p);
+         return x;
+
+     }
+/*****************************************/
+/*****Search the given node**************/
+ int Searching(struct node **START)
+ {
+     int x;
+    printf("enter the search element");
+    scanf("%d",&x);
+     struct node *p;
+     p=(*START);
+     int i=1;
+     while(p!=NULL)
+     {
+         if(p->info==x)
+        break;
+         else
+            i++;
+            p=p->Next;
+
+     }
+     return i;
+
+ }
+/*****************************************/
+/*****Search the given node**************/
+ struct node* Search(struct node **START,int x)
+ {
+   /* printf("enter the search element");
+    scanf("%d",&x);*/
+     struct node *p;
+     struct node *q;
+     p=(*START);
+     q=NULL;
+     while(p!=NULL)
+     {
+         if(p->info==x)
+       {
+           return p;
+        }
+     p=p->Next;
+    }
+    return NULL;
+ }
+ /*****************************************/
+ /**Insert the node after the given node***/
+ void InsAft(  struct node **p,int x)
+{
+     struct node *q;
+
+    /* p=Search(&START);
+     int x;*/
+     /*printf("enter the insert element");
+    scanf("%d",&x);*/
+
+    q=GetNode();
+     q->info=x;
+     q->Next=(*p)->Next;
+     (*p)->Next=q;
+
+}
+/*****************************************/
+/**Delete the node after the given node***/
+ int DelAft(struct node **p)
+{
+    int x;
+    struct node *q;
+    if((*p)==NULL||(*p)->Next==NULL)
+    {
+        printf("VOID DELECTION");
+    }
+    else
+    {
+    q=(*p)->Next;
+    (*p)->Next=q->Next;
+    x=q->info;
+    free(q);
+    }
+    return x;
+}
+/*****************************************/
+/**Insert the node in Ascending order ****/
+void OrdIns(struct node **START,int x)
+{
+    struct node *p,*q;
+    q=NULL;
+    p=(*START);
+    while(p!=NULL&&x>p->info)
+    {
+        q=p;
+        p=p->Next;
+    }
+    if(q!=NULL)
+        InsAft(&q,x);
+    else
+        InsBeg((START),x);
+}
+/*****************************************/
+/******Delete the specific node**********/
+void DelSpec(struct node **START,int x)
+{
+    struct node *p,*q;
+    p=(*START);
+    q=NULL;
+    while(p!=NULL)
+    {
+        if(p->info==x)
+        {
+            p=p->Next;
+            if(q==NULL)
+              {
+               DelBeg(&(*START));
+              }
+            else
+            {
+              DelAft(&q);
+            }
+        }
+        else
+            q=p;
+        p=p->Next;
+    }
+}
+/*****************************************/
+/***Reverse the given linked list********/
+void Reverse(struct node **START)
+{
+    struct node *p,*q,*r;
+    p=(*START);
+    r=(*START)->Next;
+    while(r!=NULL)
+    {
+        q=r->Next;
+        r->Next=p;
+        p=r;
+        r=q;
+    }
+    (*START)->Next=NULL;
+    (*START)=p;
+
+}
+/*****************************************/
+/*****Concatenate of two linked list***********/
+  Concinate(struct node **START,struct node **START1)
+{
+    struct node *p;
+    if((*START)==NULL)
+    {
+        return (*START1);
+    }
+    else
+    {
+
+         p=(*START);
+         while(p->Next!=NULL)
+         {
+             p=p->Next;
+         }
+    }
+    p->Next=(*START1);
+    return (*START);
+}
+/*****************************************/
+/****Counting of linked list node********/
+int Counting(struct node **START)
+{
+    struct node *p;
+    int count=0;
+    p=(*START);
+    while(p!=NULL)
+    {
+        count++;
+        p=p->Next;
+    }
+    printf("Count of node =%d",count);
+}
+/*****************************************/
+/**counting of odd and even linked list information*/
+void EvenOddCount(struct node **START)
+{
+    struct node *p;
+    p=(*START);
+    int Ecount,Ocount;
+    Ecount=0;
+    Ocount=0;
+    while(p!=NULL)
+    {
+        {
+            if(p->info%2==0)
+            Ecount++;
+        else
+            Ocount++;
+            }
+        p=p->Next;
+    }
+    printf("Even node is %d and Odd node is %d",Ecount,Ocount);
+}
+/*****************************************/
+/*******Delete the alternate node********/
+DelectAlter(struct node **START)
+{
+    struct node *p,*q;
+    p=(*START);
+    q=NULL;
+    int i=1;
+    while(p!=NULL)
+    {
+        if(i%2==0)
+        {
+            p=p->Next;
+            DelAft(&q);
+        }
+        else
+            q=p;
+        p=p->Next;
+    }
+    i++;
+}
+/*****************************************/
+/********Sorting of linked list***********/
+SortLinkedList(struct node **START)
+  {
+   struct node *p, *q;
+   int temp;
+   p = (*START);
+   while(p -> Next!= NULL)
+   {
+    q = p->Next;
+    while(q!= NULL)
+    {
+    if(p->info > q->info)
+     {
+     temp=p->info;
+     p->info = q->info;
+     q->info= temp;
+     }
+     q=q->Next;
+     }
+     p=p->Next;
+  }
+   return (*START);
+  }
+/*****************************************/
+/*****Traverse the linked list***********/
+void Traverse(struct node *START)
+{
+    struct node *p;
+    p=START;
+    while(p!=NULL)
+    {
+    printf(" %d ",p->info);
+       p=p->Next;
+    }
+
+}
+/*****************************************/
+/***********Main Function*****************/
+int main()
+{   int x;
+    struct node *START,*START1,*START2;
+    START=NULL;
+    START1=NULL;
+    START2=NULL;
+    printf("INSERT AT BEG\n");
+    InsBeg(&START,500);
+    InsBeg(&START,400);
+    InsBeg(&START,300);
+    InsBeg(&START,200);
+    InsBeg(&START,100);
+    Traverse(START);
+
+    printf("\nINSERT AT END\n");
+    InsEnd(&START,600);
+    InsEnd(&START,700);
+    InsEnd(&START,800);
+    printf("\n\n");
+    Traverse(START);
+
+    printf("\nDELECT AT BEG");
+    DelBeg(&START);
+    printf("\n\n");
+    Traverse(START);
+
+    printf("\nDELECT AT END");
+    DelEnd(&START);
+    printf("\n\n");
+    Traverse(START);
+
+    printf("\nINSERT  AFTER 200\n");
+    struct node*   i;
+    i= Search(&START,200);
+    InsAft(&i,1000);
+    printf("\n\n");
+    Traverse(START);
+
+   printf("\nDELECT  AFTER 500");
+   printf("\n\n");
+   i= Search(&START,500);
+   DelAft(&i);
+   Traverse(START);
+   printf("\n\n");
+
+   printf("LINKED LIST 1");
+   Traverse(START);
+   printf("\n\n");
+
+   printf("LINKED LIST 2");
+   InsBeg(&START1,1500);
+   InsBeg(&START1,1400);
+   InsBeg(&START1,1300);
+   InsBeg(&START1,1200);
+   InsBeg(&START1,100);
+   InsBeg(&START1,800);
+   Traverse(START1);
+
+   printf("\n\n");
+   printf("CONICATE THE LINKED LIST");
+   START2=Concinate(&START,&START1);
+   Traverse(START2);
+
+    printf("\n\n");
+    printf("SORTING OF LINKED LIST");
+    printf("\n\n");
+    SortLinkedList(&START2);
+    Traverse(START2);
+
+     printf("\n\n");
+     printf("Adding the linked list in ascending order \n");
+    OrdIns(&START2,100);
+    OrdIns(&START2,250);
+    OrdIns(&START2,350);
+    OrdIns(&START2,450);
+    OrdIns(&START2,500);
+    Traverse(START2);
+
+    printf("\n\n");
+    printf("Delete the specific item ");
+    printf("\n\n");
+    DelSpec(&START2,700);
+    Traverse(START);
+
+   printf("\n\n");
+   Counting(&START);
+
+   printf("\n\n");
+    EvenOddCount(&START);
+
+   printf("\n\n");
+   printf("REVERSE THE LINKED LIST \n");
+   Reverse(&START);
+   Traverse(START);
+
+
+/*****************************************/
+}
